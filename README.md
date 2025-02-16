@@ -4,22 +4,24 @@
 
 ### Setup Instructions
 
-1. **Provide Connection String**  
-   Add your connection string inside the `.env` file.
+1. **Setting environment**
+   - Create an `.env` file.
+   - Create a variable name `MONGO_URI` and add your connection string.
+   - (Optional) Create variable named `PORT` assign the value as 3000.
 
-2. **Build the project**  
+3. **Build the project**  
    Run the following command to build the project:
 
    ```bash
    npm run build
    ```
 
-3. **Start the Application**  
+4. **Start the Application**  
    To run the application, execute:
    ```bash
    npm run start
    ```
-4. **Access the Application**  
+5. **Access the Application**  
    Open your browser and go to the following URL to view the application:
    ```bash
    http://localhost:5000/
