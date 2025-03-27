@@ -69,11 +69,15 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const filteredGames = games.filter((game) => {
     return (
-      game.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      game.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      game.platform.toLowerCase().includes(searchTerm.toLowerCase())
+      (game.title &&
+        game.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (game.genre &&
+        game.genre.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (game.platform &&
+        game.platform.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
+
   const [formData, setFormData] = useState({
     _id: "",
     title: "",
