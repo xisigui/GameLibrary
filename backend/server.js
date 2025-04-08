@@ -20,3 +20,7 @@ app.listen(PORT, () => {
   connectDB();
   console.log("Server started at http://localhost:" + PORT);
 });
+
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
