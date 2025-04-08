@@ -50,7 +50,7 @@ export default function Home() {
 
   const fetchGames = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/games/");
+      const response = await axios.get("/api/games/");
       setGames(response.data.data);
     } catch (error) {
       toast({
@@ -127,11 +127,7 @@ export default function Home() {
 
     if (formMode === "add") {
       try {
-        const response = await axios.post(
-          "http://localhost:5000/api/games",
-          data,
-          config
-        );
+        const response = await axios.post("/api/games", data, config);
         toast({
           description: "Your game has been added.",
         });
@@ -146,7 +142,7 @@ export default function Home() {
       console.log(formData._id);
       try {
         const response = await axios.put(
-          `http://localhost:5000/api/games/${formData._id}`,
+          `/api/games/${formData._id}`,
           data,
           config
         );
@@ -165,7 +161,7 @@ export default function Home() {
   };
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/games/${id}`);
+      await axios.delete(`/api/games/${id}`);
       toast({
         description: "Your game has been deleted.",
       });
