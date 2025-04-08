@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { loadEnvConfig } from "@next/env";
 import {
   Dialog,
   DialogContent,
@@ -40,19 +40,23 @@ import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 
 export default function Home() {
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
+
   const [games, setGames] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     fetchGames();
+    console.log("Base URL: ", baseUrl);
   }, []);
 
   const fetchGames = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/games/");
+      const response = await axios.get(`${baseUrl}/api/games/`);
       setGames(response.data.data);
     } catch (error) {
+      console.error("Error fetching games:", error);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -127,11 +131,7 @@ export default function Home() {
 
     if (formMode === "add") {
       try {
-        const response = await axios.post(
-          "http://localhost:5000/api/games",
-          data,
-          config
-        );
+        const response = await axios.post(`${baseUrl}/api/games`, data, config);
         toast({
           description: "Your game has been added.",
         });
@@ -146,7 +146,7 @@ export default function Home() {
       console.log(formData._id);
       try {
         const response = await axios.put(
-          `http://localhost:5000/api/games/${formData._id}`,
+          `${baseUrl}/api/games/${formData._id}`,
           data,
           config
         );
@@ -165,7 +165,7 @@ export default function Home() {
   };
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/games/${id}`);
+      await axios.delete(`${baseUrl}/api/games/${id}`);
       toast({
         description: "Your game has been deleted.",
       });
